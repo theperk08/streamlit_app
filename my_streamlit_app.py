@@ -21,9 +21,14 @@ df_cars
 col_a, col_b = st.columns(2)
 with col_a:
 	st.write("Tout d'abord une heatmap de corrélation :")
-	fig = sns.heatmap(df_cars)
-	st.plotly_chart(fig)
+	fig = make_subplots(rows = 1, cols = 1)
 
+	fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
+			 	y = df_cars.columns[:-1],
+				z = df_cars.corr()),				
+				row = 1,
+				col = 1)
+	st.plotly_chart(fig)
 # mpg by year
 with col_b:
 	st.write("Ainsi qu'un scatterplot mpg/année :")
