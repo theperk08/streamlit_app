@@ -25,7 +25,7 @@ with col_a:
 
 	fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
 			 	y = df_cars.columns[:-1],
-				z = df_cars.corr()),				
+				z = df_cars.corr(numeric_only = True)),				
 				row = 1,
 				col = 1)
 	st.plotly_chart(fig)
