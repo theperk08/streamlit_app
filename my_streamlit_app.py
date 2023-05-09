@@ -3,8 +3,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-
-import plotly.express as px
 from plotly.subplots import make_subplots
 
 st.set_page_config(
@@ -27,7 +25,8 @@ with col_a:
 
 	fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
 			 	y = df_cars.columns[:-1],
-				z = df_cars.corr(),colorscale = 'Picnic'),				
+				z = df_cars.corr(),
+				colorscale = 'Picnic'),				
 				row = 1,
 				col = 1)
 	st.plotly_chart(fig)
@@ -41,7 +40,6 @@ with col_b:
 				mode = 'markers'),
 				row = 1,
 				col = 1)
-
 
 	st.plotly_chart(fig2)
 
