@@ -21,7 +21,7 @@ df_cars
 col_a, col_b = st.columns(2)
 with col_a:
 	st.write("Tout d'abord une heatmap de corrélation :")
-	fig = sns.heatmap(df_cars.corr())
+	fig = sns.heatmap(df_cars)
 	st.plotly_chart(fig)
 
 # mpg by year
