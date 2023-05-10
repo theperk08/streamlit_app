@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 import plotly.express as px
 from plotly.subplots import make_subplots
-import statsmodels.api as sm
+
 
 
 st.set_page_config(
@@ -101,8 +101,7 @@ if submit1:
 	#fig_bar3.update_xaxes(title=dict({'text' : 'Poids (livres)'}))
 	#fig_bar3.update_yaxes(title=dict({'text' : 'Distance parcourue (mpg)'}))
 
-	fig = px.scatter(df_region, x = 'weightlbs', y ='mpg',  trendline="ols", trendline_scope="overall"
-                )
+	fig = px.scatter(df_region, x = 'weightlbs', y ='mpg' )
 	
 	fig.update_traces(showlegend=True) #trendlines have showlegend=False by default
 	
