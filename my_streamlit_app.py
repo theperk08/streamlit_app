@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 
 import plotly.express as px
 from plotly.subplots import make_subplots
+import statsmodels.api as sm
+
 
 st.set_page_config(
   page_title = "Cars App",
@@ -20,44 +22,33 @@ link = "https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv"
 df_cars = pd.read_csv(link, sep=",")
 df_cars
 
-col_a, col_b = st.columns(2)
-with col_a:
-	st.write("Tout d'abord une heatmap de corrélation :")
+st.write("Tout d'abord une heatmap de corrélation :")
 
-		
-	
-	
-	fig = make_subplots(rows = 1, cols = 1)
+fig = make_subplots(rows = 1, cols = 1)
 
-	fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
-			 	y = df_cars.columns[:-1],
-				z = df_cars.corr(numeric_only=True),colorscale = 'Picnic'),				
-				row = 1,
-				col = 1)
-	st.plotly_chart(fig)
+fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
+		 	y = df_cars.columns[:-1],
+			z = df_cars.corr(numeric_only=True),colorscale = 'Picnic'),				
+			row = 1,
+			col = 1)
+st.plotly_chart(fig)
 
-# mpg by year
-with col_b:
-	st.write("Ainsi qu'un scatterplot volume/nombre de cylindres :")
-	fig2 = make_subplots(rows = 1, cols = 1)
-	fig2.add_trace(go.Scatter(x=df_cars['cylinders'],
-			 	y = df_cars['cubicinches'],
-				mode = 'markers'),
-				row = 1,
-				col = 1)
+st.write("Ainsi qu'un pairplot des différentes données :")
 
+fig0 = sns.pairplot(df_cars, hue = 'continent')	
+st.pyplot(fig0)
 
-	st.plotly_chart(fig2)
-
+st.write("D'un coup d'oeil on peut s'apercevoir que :")
+st.write('- le volume (cubicinches), les Chevaux-Vapeur (HP) et le poids (weights) sont fortement corrélés')
+st.write('- les véhicules américains se distinguent des japonais et des européens comme étant plus lourds, plus puissants et plus rapides')
 st.write('Maintenant, fais-toi plaisir et choisis la région :')
 
 
-
-with st.form('form_1'):
-	region1 = st.selectbox("Region : ",
-	                           [' Europe.', ' US.', ' Japan.'])
-	        
-	submit1 = st.form_submit_button("OK !")
+col_1, col_2, col_3 = st.columns(3)
+with col_2:
+	with st.form('form_1'):
+		region1 = st.selectbox("Region : ",[' Europe.', ' US.', ' Japan.'])
+		submit1 = st.form_submit_button("OK !")
 	    
 if submit1:
 	#st.write(region)
