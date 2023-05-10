@@ -33,7 +33,7 @@ fig.add_trace(go.Heatmap(x=df_cars.columns[:-1],
 			col = 1)
 st.plotly_chart(fig)
 
-st.write("Ainsi qu'un pairplot des différentes données :")
+st.write("Ainsi qu'un pairplot des différentes données : (veuillez patienter 30 secondes)")
 
 fig0 = sns.pairplot(df_cars, hue = 'continent')	
 st.pyplot(fig0)
